@@ -15,10 +15,18 @@ app.get("", (req, res) => {
 });
 
 //CHEKCING IF THE NUMBERS ARE CALCULABLE
-const checkFlow = (num1, num2) => {
-	if (num1 < -1000000 || num2 < -1000000 || num1 - num2 < -1000000) {
+const checkFlow = (num1, num2, operation) => {
+	if (
+		num1 < -1000000 ||
+		num2 < -1000000 ||
+		checkResult(num1, num2, operation) < -1000000
+	) {
 		return "Underflow";
-	} else if (num1 > 1000000 || num2 > 1000000 || num1 + num2 > 1000000) {
+	} else if (
+		num1 > 1000000 ||
+		num2 > 1000000 ||
+		checkResult(num1, num2, operation) > 1000000
+	) {
 		return "Overflow";
 	} else if (isNaN(num1) || isNaN(num2)) {
 		return "Invalid data types";
@@ -27,11 +35,24 @@ const checkFlow = (num1, num2) => {
 	}
 };
 
+//CHECK THE RESULT
+const checkResult = (num1, num2, operation) => {
+	if (operation === "sum") {
+		return num1 + num2;
+	} else if (operation === "diff") {
+		return num1 - num2;
+	} else if (operation === "mul") {
+		return num1 * num2;
+	} else if (operation === "div") {
+		return num1 / num2;
+	}
+};
+
 //ADDITION
 app.post("/add", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
-	if (checkFlow(req.body.num1, req.body.num2) === true) {
+	if (checkFlow(req.body.num1, req.body.num2, "sum") === true) {
 		res.send({
 			status: "success",
 			message: "the sum of given two numbers",
@@ -49,7 +70,7 @@ app.post("/add", (req, res) => {
 app.post("/sub", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
-	if (checkFlow(req.body.num1, req.body.num2) === true) {
+	if (checkFlow(req.body.num1, req.body.num2, "diff") === true) {
 		res.send({
 			status: "success",
 			message: "the difference of given two numbers",
@@ -68,7 +89,7 @@ app.post("/multiply", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
 	if (
-		checkFlow(req.body.num1, req.body.num2) === true &&
+		checkFlow(req.body.num1, req.body.num2, "mul") === true &&
 		!req.body.num1 * req.body.num2 > 1000000
 	) {
 		res.send({
@@ -88,7 +109,10 @@ app.post("/multiply", (req, res) => {
 app.post("/divide", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
-	if (checkFlow(req.body.num1, req.body.num2) === true && req.body.num2 != 0) {
+	if (
+		checkFlow(req.body.num1, req.body.num2, "div") === true &&
+		req.body.num2 != 0
+	) {
 		res.send({
 			status: "success",
 			message: "The division of given numbers",
