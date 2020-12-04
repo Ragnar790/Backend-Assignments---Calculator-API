@@ -16,6 +16,7 @@ app.get("", (req, res) => {
 
 //CHEKCING IF THE NUMBERS ARE CALCULABLE
 const checkFlow = (num1, num2, operation) => {
+	console.log("Result ", checkResult(num1, num2, operation));
 	if (
 		num1 < -1000000 ||
 		num2 < -1000000 ||
@@ -61,7 +62,7 @@ app.post("/add", (req, res) => {
 	} else {
 		res.send({
 			status: "error",
-			message: checkFlow(req.body.num1, req.body.num2),
+			message: checkFlow(req.body.num1, req.body.num2, "sum"),
 		});
 	}
 });
@@ -79,7 +80,7 @@ app.post("/sub", (req, res) => {
 	} else {
 		res.send({
 			status: "error",
-			message: checkFlow(req.body.num1, req.body.num2),
+			message: checkFlow(req.body.num1, req.body.num2, "diff"),
 		});
 	}
 });
@@ -88,10 +89,7 @@ app.post("/sub", (req, res) => {
 app.post("/multiply", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
-	if (
-		checkFlow(req.body.num1, req.body.num2, "mul") === true &&
-		!req.body.num1 * req.body.num2 > 1000000
-	) {
+	if (checkFlow(req.body.num1, req.body.num2, "mul") === true) {
 		res.send({
 			status: "success",
 			message: "The product of given numbers",
@@ -100,7 +98,7 @@ app.post("/multiply", (req, res) => {
 	} else {
 		res.send({
 			status: "error",
-			message: checkFlow(req.body.num1, req.body.num2),
+			message: checkFlow(req.body.num1, req.body.num2, "mul"),
 		});
 	}
 });
@@ -126,7 +124,7 @@ app.post("/divide", (req, res) => {
 	} else {
 		res.send({
 			status: "error",
-			message: checkFlow(req.body.num1, req.body.num2),
+			message: checkFlow(req.body.num1, req.body.num2, "div"),
 		});
 	}
 });
