@@ -67,7 +67,10 @@ app.post("/sub", (req, res) => {
 app.post("/multiply", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
-	if (checkFlow(req.body.num1, req.body.num2) === true) {
+	if (
+		checkFlow(req.body.num1, req.body.num2) === true &&
+		!num1 * num2 > 1000000
+	) {
 		res.send({
 			status: "success",
 			message: "The product of given numbers",
