@@ -14,6 +14,7 @@ app.get("", (req, res) => {
 	res.send("Hello world!");
 });
 
+//CHEKCING IF THE NUMBERS ARE CALCULABLE
 const checkFlow = (num1, num2) => {
 	if (num1 < -1000000 || num2 < -1000000 || num1 - num2 < -1000000) {
 		return "Underflow";
@@ -26,6 +27,7 @@ const checkFlow = (num1, num2) => {
 	}
 };
 
+//ADDITION
 app.post("/add", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
@@ -43,6 +45,7 @@ app.post("/add", (req, res) => {
 	}
 });
 
+//SUBTRACTION
 app.post("/sub", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
@@ -60,6 +63,7 @@ app.post("/sub", (req, res) => {
 	}
 });
 
+//MULTIPLY
 app.post("/multiply", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
@@ -77,6 +81,7 @@ app.post("/multiply", (req, res) => {
 	}
 });
 
+//DIVIDE
 app.post("/divide", (req, res) => {
 	// console.log(req.body.num1);
 	// console.log(req.body.num2);
