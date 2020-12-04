@@ -70,7 +70,7 @@ app.post("/multiply", (req, res) => {
 	if (checkFlow(req.body.num1, req.body.num2) === true) {
 		res.send({
 			status: "success",
-			message: "the product of given numbers",
+			message: "The product of given numbers",
 			result: req.body.num1 * req.body.num2,
 		});
 	} else {
@@ -88,7 +88,7 @@ app.post("/divide", (req, res) => {
 	if (checkFlow(req.body.num1, req.body.num2) === true && req.body.num2 != 0) {
 		res.send({
 			status: "success",
-			message: "the division of given numbers",
+			message: "The division of given numbers",
 			result: req.body.num1 / req.body.num2,
 		});
 	} else if (req.body.num2 === 0) {
