@@ -69,7 +69,7 @@ app.post("/multiply", (req, res) => {
 	// console.log(req.body.num2);
 	if (
 		checkFlow(req.body.num1, req.body.num2) === true &&
-		!num1 * num2 > 1000000
+		!req.body.num1 * req.body.num2 > 1000000
 	) {
 		res.send({
 			status: "success",
